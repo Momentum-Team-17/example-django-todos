@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ItemForm
 from .models import Item
 
@@ -22,3 +22,23 @@ def create_todo(request):
             return redirect('home')
     form = ItemForm()
     return render(request, 'todos/new_todo.html', {'form': form})
+
+
+def detail_todo(request, pk):
+    # takes in pk value from url
+    # todo = Item.objects.get(pk=pk)
+    # the line above with throw an error if there is no item with that pk in the database, so we use get_object_or_404
+    todo = get_object_or_404(Item, pk=pk)
+    # get the Item object whose primary key matches pk that was passed in the url
+    return render(request, 'todos/detail_todo.html', {'todo': todo})
+
+
+def edit_todo(request, pk):
+    todo = get_object_or_404(Item, pk=pk)
+    if request.method == 'POST':
+        item_form = ItemForm(request.POST, instance=todo)
+        if item_form.is_valid():
+            item_form.save()
+            return redirect('home')
+    form = ItemForm(instance=todo)
+    return render(request, 'todos/edit_todo.html', {'form': form, 'pk': pk})
