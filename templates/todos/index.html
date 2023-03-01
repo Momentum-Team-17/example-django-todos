@@ -11,7 +11,7 @@
     <h2>Summon some executive function</h2>
     <ul>
     {% for todo in todos %}
-    <li>{{ todo }}</li>
+    <li><a href="{% url 'detail-todo' todo.pk %}">{{ todo }}</a></li>
     {% endfor %}
     </ul>
     <a href="{% url 'new-todo' %}">Add a new todo</a>

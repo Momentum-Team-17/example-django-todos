@@ -12,5 +12,6 @@
     <h2>{{ todo.title }}</h2>
     <p>{{ todo.description }}</p>
     <h3>Priority: {{todo.priority}}</h3>
+    <a href="{% url 'edit-todo' todo.pk %}">Edit this entry</a>
 </body>
 </html>
