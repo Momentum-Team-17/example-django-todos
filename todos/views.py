@@ -42,3 +42,10 @@ def edit_todo(request, pk):
             return redirect('home')
     form = ItemForm(instance=todo)
     return render(request, 'todos/edit_todo.html', {'form': form, 'pk': pk})
+
+
+def delete_todo(request, pk):
+    todo = get_object_or_404(Item, pk=pk)
+    if request.method == 'POST':
+        todo.delete()
+    return render(request, 'todos, delete_todo.html')
