@@ -11,6 +11,11 @@ def list_todos(request):
     return render(request, 'todos/index.html', {'todos': todos})
 
 
+def get_todo_by_priority(request, priority):
+    todos = Item.objects.filter(priority=priority)
+    return render(request, 'todos/index.html', {'todos': todos})
+
+
 def create_todo(request):
     if request.method == 'POST':
         item_form = ItemForm(request.POST)

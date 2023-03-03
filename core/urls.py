@@ -24,4 +24,6 @@ urlpatterns = [
     path('todos/<int:pk>', views.detail_todo, name='detail-todo'),
     path('todos/<int:pk>/edit', views.edit_todo, name='edit-todo'),
     path('todos/<int:pk>/delete', views.delete_todo, name='delete-todo'),
+    path('todos/by-priority/<int:priority>/',
+         views.get_todo_by_priority, name='by-priority')
 ]
